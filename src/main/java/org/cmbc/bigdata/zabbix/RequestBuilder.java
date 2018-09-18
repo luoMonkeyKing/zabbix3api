@@ -1,6 +1,5 @@
 package org.cmbc.bigdata.zabbix;
 
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class RequestBuilder {
@@ -8,7 +7,7 @@ public class RequestBuilder {
 
   private Request request = new Request();
 
-  private RequestBuilder(){
+  private RequestBuilder() {
 
   }
 
@@ -16,24 +15,34 @@ public class RequestBuilder {
     return new RequestBuilder();
   }
 
-  public Request build(){
+  public Request build() {
     if(request.getId() == null){
       request.setId(nextId.getAndIncrement());
     }
     return request;
   }
 
-  public RequestBuilder version(String version){
+  public RequestBuilder version(String version) {
     request.setJsonrpc(version);
     return this;
   }
 
-  public RequestBuilder paramEntry(String key, Object value){
+  public RequestBuilder initParam(String type) {
+    if (type.equals("Map")) {
+      request.initParam("Map");
+    } else if(type.equals("List")) {
+      request.initParam("List");
+    }
+
+    return this;
+  }
+
+  public RequestBuilder paramEntry(String key, Object value) {
     request.putParam(key, value);
     return this;
   }
 
-  public RequestBuilder paramAdd(Map<String, Object> param) {
+  public RequestBuilder paramAdd(Object param) {
     request.addParam(param);
     return this;
   }

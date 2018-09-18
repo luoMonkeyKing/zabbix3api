@@ -10,9 +10,13 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <jackson.version>2.9.1</jackson.version>
         <lombok.version>1.16.16</lombok.version>
         <httpclient.version>4.5.5</httpclient.version>
+        <log4j.version>1.2.17</log4j.version>
+        <junit.version>4.12</junit.version>
     </properties>
 
     <dependencies>
@@ -41,6 +45,12 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

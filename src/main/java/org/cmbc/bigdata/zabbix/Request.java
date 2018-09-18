@@ -15,7 +15,6 @@ import java.util.Map;
 public class Request {
   private String jsonrpc = "2.0";
 
-  //private Map<String, Object> params = new HashMap<>();
   private Object params = null;
 
   private String method;
@@ -24,81 +23,25 @@ public class Request {
 
   private Integer id;
 
-  /*
-  public void putParam(String key, Object value) {
-    params.put(key, value);
-  }
-  */
-  public void putParam(String key, Object value) {
-    if (params == null) {
+  public void initParam(String type) {
+    if (type.equals("Map")) {
       params = new HashMap<String, Object>();
+    } else if (type.equals("List")) {
+      params = new ArrayList<>();
     }
-    ((Map)this.params).put(key, value);
   }
 
-  /*
-  public Object removeParam(String key) {
-    return params.remove(key);
+  public void putParam(String key, Object value) {
+    ((Map)this.params).put(key, value);
   }
-  */
 
   public void removeParam(String key, Object value) {
     ((Map)this.params).remove(key);
   }
 
-  public void addParam(Map<String, Object> param) {
-    if (params == null) {
-      params = new ArrayList<HashMap>();
-    }
+  public void addParam(Object param) {
     ((List)this.params).add(param);
   }
-  /*
-  public String getJsonrpc() {
-    return jsonrpc;
-  }
-
-  public void setJsonrpc(String jsonrpc) {
-    this.jsonrpc = jsonrpc;
-  }
-
-
-  public Map<String, Object> getParams() {
-    return params;
-  }
-
-  public void setParams(Map<String, Object> params) {
-    this.params = params;
-  }
-
-
-  public void setParams(Object params) {
-    this.params = params;
-  }
-
-  public String getMethod() {
-    return method;
-  }
-
-  public void setMethod(String method) {
-    this.method = method;
-  }
-
-  public String getAuth() {
-    return auth;
-  }
-
-  public void setAuth(String auth) {
-    this.auth = auth;
-  }
-
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-  */
 
   @Override
   public String toString() {
