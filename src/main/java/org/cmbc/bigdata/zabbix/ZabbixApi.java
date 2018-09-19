@@ -15,10 +15,12 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -96,7 +98,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
     if (params != null && params instanceof Map) {
       requestBuilder = requestBuilder.initParam("Map");
       for (Map.Entry<String, Object> param : ((Map<String, Object>)params).entrySet()) {
-        requestBuilder.paramEntry(param.getKey(), param.getValue()).build();
+        requestBuilder.paramEntry(param.getKey(), param.getValue());
       }
     }
     if (params != null && params instanceof List) {
@@ -130,12 +132,8 @@ public class ZabbixApi implements ZabbixAPIInterface {
       HttpUriRequest httpRequest = org.apache.http.client.methods.RequestBuilder.post().setUri(uri)
               .addHeader("Content-Type", "application/json")
               .setEntity(new StringEntity(request.toString(), ContentType.APPLICATION_JSON)).build();
-      log.info("Call API. HttpRequest:" + httpRequest.toString());
-      System.out.println(("Call API. Request is :" + request.toString()));
+      log.info(("Call API. Request is :" + request.toString()));
       CloseableHttpResponse response = httpClient.execute(httpRequest);
-      if (response == null) {
-        System.out.println("response is null");
-      }
       HttpEntity entity = response.getEntity();
       return new ObjectMapper().readTree(entity.getContent());
     } catch (IOException e) {
@@ -146,8 +144,6 @@ public class ZabbixApi implements ZabbixAPIInterface {
   private void printAPIResult(ZabbixAPIResult zabbixAPIResult) {
     try {
       log.info("Call API. Result is :" + new ObjectMapper().
-              writerWithDefaultPrettyPrinter().writeValueAsString(zabbixAPIResult));
-      System.out.println("Call API. Result is :" + new ObjectMapper().
               writerWithDefaultPrettyPrinter().writeValueAsString(zabbixAPIResult));
     } catch (Exception exception) {
       exception.printStackTrace();

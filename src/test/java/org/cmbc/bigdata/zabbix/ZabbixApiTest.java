@@ -24,8 +24,6 @@ public class ZabbixApiTest {
   static final String Zabbix_Test_Host_Group_Two = "testgroup2";
   static final String Zabbix_Test_Host_One = "testhost1";
   static final String Zabbix_Test_Host_Two = "testhost2";
-  static final String Zabbix_Test_Item_One_Name = "testItem1";
-  static final String Zabbix_Test_Item_Two_Name = "testItem2";
   static final String Zabbix_Test_Item_One_Key = "testItemKey1";
   static final String Zabbix_Test_Item_Two_Key = "testItemKey2";
 

@@ -1,0 +1,193 @@
+= Zabbix3 API in Java
+
+[[_overview]]
+== Overview
+Zabbix3 API is a Java library to access Zabbix API. It's based on Zabbix 3.0. According to the API changes published in official site, it can also be used in 3.2 and 3.4.
+This project is based on https://github.com/hengyunabc/zabbix-api and the main work can been seen from the following:
+
+// tag::base-t[]
+.Following features are provided:
+* Get API version of zabbix
+* Login zabbix
+* Create/Get/Delete/Check of hostgroup/host/interface/item. Also support operations on multiple hostgroups/hosts/interfaces/items.
+* Flexible way to extend. Function callApi(String method, Object params) in ZabbixApi can be used to access API as you want, if specific functions are not provided.
+* Logging request to zabbix and result from zabbix.
+
+To enable these features we made a few changes based on zabbix api project(https://github.com/hengyunabc/zabbix-api):
+
+* Design uniform API return result. ZabbixAPIResult has 3 fields: code, data, message.
+* Refactor Request class and change "params" from Map to Object. It resolve the main problem of original project that it can't support multiple params. The issue url :https://github.com/hengyunabc/zabbix-api/issues/9
+* Replace alibaba fastjson with jackson lib.
+* Use JDK 1.8.
+
+=== How to build
+
+You can build this lib using maven.
+
+#git clone https://github.com/tinawenqiao/zabbix3api.git +
+#cd zabbix3api/ +
+
+Change the following field value in ZabbixApiTest.java according to your running environment:
+
+* Zabbix_API_URL
+* Zabbix_Version
+* Zabbix_User
+* Zabbix_Password
+* Zabbix_Password_Wrong
+* Zabbix_Test_Host_Group_One
+* Zabbix_Test_Host_Group_Two
+* Zabbix_Test_Host_One
+* Zabbix_Test_Host_Two
+* Zabbix_Test_Item_One_Name
+* Zabbix_Test_Item_Two_Name
+* Zabbix_Test_Item_One_Key
+* Zabbix_Test_Item_Two_Key
+
+#mvn clean package
+
+You will find jar under directory: zabbix3api/target
+
+Import the jar into your project and you can use it now.
+
+=== How to Get API version
+[source,java]
+----
+    String Zabbix_API_URL = "http://127.0.0.1:8888/zabbix/api_jsonrpc.php";
+    zabbixApi = new ZabbixApi(Zabbix_API_URL);
+    zabbixApi.init();
+    ZabbixAPIResult zabbixAPIResult = zabbixApi.apiVersion();
+    if(!zabbixAPIResult.isFail()) {
+        JsonNode data = (JsonNode) zabbixAPIResult.getData();
+        String version = data.asText();
+    }
+    zabbixApi.destroy();
+----
+
+=== How to Login Zabbix
+[source,java]
+----
+    String Zabbix_API_URL = "http://127.0.0.1:8888/zabbix/api_jsonrpc.php";
+    zabbixApi = new ZabbixApi(Zabbix_API_URL);
+    zabbixApi.init();
+
+    String Zabbix_User = "Admin";
+    String Zabbix_Password = "zabbix";
+    //If login returns true, it means login sucessfully. False means failed.
+    boolean login = zabbixApi.login(Zabbix_User, Zabbix_Password);
+    zabbixApi.destroy();
+----
+
+=== Create/Delete/Get/Check Host group
+[source,java]
+----
+    String Zabbix_API_URL = "http://127.0.0.1:8888/zabbix/api_jsonrpc.php";
+    zabbixApi = new ZabbixApi(Zabbix_API_URL);
+    zabbixApi.init();
+
+    String Zabbix_User = "Admin";
+    String Zabbix_Password = "zabbix";
+    //If login returns true, it means login sucessfully. False means failed.
+    boolean login = zabbixApi.login(Zabbix_User, Zabbix_Password);
+
+    String group1name = "hostgroup1";
+    String group2name = "hostgroup2";
+    ArrayList<String> groupNameList = new ArrayList();
+    groupNameList.add(group1name);
+    groupNameList.add(group2name);
+    if (login) {
+        //Check whether host group exists
+        zabbixApi.hostgroupExists(group1name);
+        //Create one host group
+        zabbixApi.hostgroupCreate(group1name);
+        //Create multiple host groups
+        zabbixApi.hostgroupListCreate(groupNameList);
+        //Delete one host group by name
+        zabbixApi.hostgroupDeleteByName(group1name);
+        //Delete multiple host groups by name
+        zabbixApi.hostgroupListDeleteByName(groupNameList);
+        //Get one host group info
+        zabbixApi.hostgroupGetByName(group1name);
+        //Get multiple host groups info
+        zabbixApi.hostgroupListGetByName(groupNameList);
+    }
+    zabbixApi.destroy();
+----
+
+=== Create/Delete/Get/Check Host
+## Host Create Example. Refer to ZabbixAPITest.java to get how to operate on multiple hosts.
+[source,java]
+----
+    String Zabbix_API_URL = "http://127.0.0.1:8888/zabbix/api_jsonrpc.php";
+    zabbixApi = new ZabbixApi(Zabbix_API_URL);
+    zabbixApi.init();
+
+    String Zabbix_User = "Admin";
+    String Zabbix_Password = "zabbix";
+    //If login returns true, it means login sucessfully. False means failed.
+    boolean login = zabbixApi.login(Zabbix_User, Zabbix_Password);
+
+    String Zabbix_Test_Host_Group_One = "testgroup1";
+    String Zabbix_Test_Host_One = "testhost1";
+
+    // Get the groupid of Zabbix_Test_Host_Group_One
+    if (zabbixApi.hostgroupExists(Zabbix_Test_Host_Group_One)) {
+      ZabbixAPIResult hostgroupGetResult = zabbixApi.hostgroupGetByGroupName(Zabbix_Test_Host_Group_One);
+      if (!hostgroupGetResult.isFail()) {
+        JsonNode data = (JsonNode) hostgroupGetResult.getData();
+        // If Zabbix_Test_Host_Group exists, fetch the groupid
+        groupId = data.get(0).get("groupid").asText();
+      }
+    } else {
+      ZabbixAPIResult hostgroupCreateResult = zabbixApi.hostgroupCreate(Zabbix_Test_Host_Group_One);
+      if (!hostgroupCreateResult.isFail()) {
+        JsonNode data = (JsonNode) hostgroupCreateResult.getData();
+        groupId = data.get("groupids").get(0).asText();
+      }
+    }
+
+    ArrayList<String> groupIdList = new ArrayList<>();
+    groupIdList.add(groupId);
+
+    Map hostInterface = new HashMap<>();
+    hostInterface.put("dns", "");
+    hostInterface.put("ip", "127.0.0.1");
+    hostInterface.put("main", 1);
+    hostInterface.put("port", "10050");
+    hostInterface.put("type", "1");
+    hostInterface.put("useip", 1);
+
+    zabbixApi.hostCreate(Zabbix_Test_Host_One, groupIdList, hostInterface);
+    zabbixApi.destroy();
+----
+
+=== Extend
+Zabbix3 has so many api method that we don't list all in zabbix3api. You can use callApi to make your own requests.
+Take usergroup.create for example as follows:
+
+[source,java]
+----
+    String Zabbix_API_URL = "http://127.0.0.1:8888/zabbix/api_jsonrpc.php";
+    zabbixApi = new ZabbixApi(Zabbix_API_URL);
+    zabbixApi.init();
+
+    String Zabbix_User = "Admin";
+    String Zabbix_Password = "zabbix";
+    //If login returns true, it means login sucessfully. False means failed.
+    boolean login = zabbixApi.login(Zabbix_User, Zabbix_Password);
+
+    String method = "usergroup.create";
+    HashMap params = new HashMap();
+    params.put("name", "testusergroup");
+
+    zabbixApi.callApi(method, params);
+
+    zabbixApi.destroy();
+----
+
+=== Contact information
+[%hardbreaks]
+__Contact__ : tinawenqiao
+__Contact Email__ : 315524513@qq.com
+__Github__ : https://github.com/tinawenqiao
+
+
