@@ -7,7 +7,7 @@ public interface ZabbixAPIInterface {
 
   void destroy();
 
-  JsonNode call(Request request);
+  JsonNode call(RequestAbstract request);
 
   boolean login(String user, String password);
 }

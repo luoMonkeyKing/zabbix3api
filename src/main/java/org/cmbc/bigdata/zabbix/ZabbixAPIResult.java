@@ -1,10 +1,8 @@
 package org.cmbc.bigdata.zabbix;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class ZabbixAPIResult {
   public int code;
   public String message;

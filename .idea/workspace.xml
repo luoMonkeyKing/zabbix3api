@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7cd05e68-d38d-453e-bf69-96da4bd5c641" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/README.adoc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ListRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/MapRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestAbstract.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/Request.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIResult.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/cmbc/bigdata/zabbix/ZabbixApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/cmbc/bigdata/zabbix/ZabbixApiTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -19,35 +23,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ZabbixApi.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ZabbixApi.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7284">
-              <caret line="563" column="25" selection-start-line="563" selection-start-column="25" selection-end-line="563" selection-end-column="25" />
+            <state relative-caret-position="238">
+              <caret line="185" column="11" selection-start-line="185" selection-start-column="11" selection-end-line="185" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2506#2507#0" expanded="true" />
+                <element signature="e#2563#2564#0" expanded="true" />
+                <element signature="e#4585#4586#0" expanded="true" />
+                <element signature="e#4636#4637#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.adoc" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/README.adoc">
-          <provider selected="true" editor-type-id="split-provider[text-editor;AsciiDocPreviewEditor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="270">
-                <caret line="18" column="38" lean-forward="true" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-              </first_editor>
-              <second_editor />
+      <file leaf-file-name="ZabbixAPIInterface.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+      <file leaf-file-name="ZabbixAPIResult.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIResult.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="62" column="27" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
+            <state relative-caret-position="45">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZabbixAPIResultCode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIResultCode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -55,8 +69,59 @@
       <file leaf-file-name="ZabbixApiTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/org/cmbc/bigdata/zabbix/ZabbixApiTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-171">
-              <caret line="138" column="59" lean-forward="true" selection-start-line="138" selection-start-column="59" selection-end-line="138" selection-end-column="59" />
+            <state relative-caret-position="280">
+              <caret line="61" column="17" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZabbixItemType.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixItemType.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZabbixItemValueType.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixItemValueType.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MapRequest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/MapRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="28" lean-forward="true" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequestAbstract.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestAbstract.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequestBuilder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestBuilder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="36" column="24" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,6 +147,8 @@
       <find>found</find>
       <find>itemE</find>
       <find>print</find>
+      <find>List</find>
+      <find>call</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -109,16 +176,21 @@
         <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPI.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/cmbc/bigdata/zabbix/ZabbixAPITest.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApiInterface.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIInterface.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIResult.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/Request.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixItemType.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixItemValueType.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestBuilder.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApi.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/cmbc/bigdata/zabbix/ZabbixApiTest.java" />
         <option value="$PROJECT_DIR$/src/README.adoc" />
+        <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestInterface.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApiNew.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIInterface.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestAbstract.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/MapRequest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ListRequest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIResult.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApi.java" />
       </list>
     </option>
   </component>
@@ -158,9 +230,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="721" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -321,8 +392,14 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="org.cmbc.bigdata.zabbix" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.cmbc.bigdata.zabbix" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -367,7 +444,7 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="ZabbixApiTest.testHostInterfaceListCreateError" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ZabbixApiTest.testApiVersion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="zabbix3api" />
       <extension name="coverage">
         <pattern>
@@ -379,7 +456,7 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="org.cmbc.bigdata.zabbix" />
       <option name="MAIN_CLASS_NAME" value="org.cmbc.bigdata.zabbix.ZabbixApiTest" />
-      <option name="METHOD_NAME" value="testHostInterfaceListCreateError" />
+      <option name="METHOD_NAME" value="testApiVersion" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -390,7 +467,7 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="ZabbixApiTest.testItemCreate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ZabbixApiTest.testHostListCreateAndDelete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="zabbix3api" />
       <extension name="coverage">
         <pattern>
@@ -402,7 +479,7 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="org.cmbc.bigdata.zabbix" />
       <option name="MAIN_CLASS_NAME" value="org.cmbc.bigdata.zabbix.ZabbixApiTest" />
-      <option name="METHOD_NAME" value="testItemCreate" />
+      <option name="METHOD_NAME" value="testHostListCreateAndDelete" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -413,7 +490,7 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="ZabbixApiTest.testItemCreateAndDelete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ZabbixApiTest.testHostgroupCreateAndDelete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="zabbix3api" />
       <extension name="coverage">
         <pattern>
@@ -425,7 +502,7 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="org.cmbc.bigdata.zabbix" />
       <option name="MAIN_CLASS_NAME" value="org.cmbc.bigdata.zabbix.ZabbixApiTest" />
-      <option name="METHOD_NAME" value="testItemCreateAndDelete" />
+      <option name="METHOD_NAME" value="testHostgroupCreateAndDelete" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -436,7 +513,7 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="ZabbixApiTest.testItemListCreateAndDelete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ZabbixApiTest.testLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="zabbix3api" />
       <extension name="coverage">
         <pattern>
@@ -448,7 +525,7 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="org.cmbc.bigdata.zabbix" />
       <option name="MAIN_CLASS_NAME" value="org.cmbc.bigdata.zabbix.ZabbixApiTest" />
-      <option name="METHOD_NAME" value="testItemListCreateAndDelete" />
+      <option name="METHOD_NAME" value="testLogin" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -499,18 +576,18 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.ZabbixApiTest" />
-      <item itemvalue="JUnit.ZabbixApiTest.testHostInterfaceListCreateError" />
-      <item itemvalue="JUnit.ZabbixApiTest.testItemCreate" />
-      <item itemvalue="JUnit.ZabbixApiTest.testItemCreateAndDelete" />
-      <item itemvalue="JUnit.ZabbixApiTest.testItemListCreateAndDelete" />
+      <item itemvalue="JUnit.ZabbixApiTest.testApiVersion" />
+      <item itemvalue="JUnit.ZabbixApiTest.testLogin" />
+      <item itemvalue="JUnit.ZabbixApiTest.testHostgroupCreateAndDelete" />
+      <item itemvalue="JUnit.ZabbixApiTest.testHostListCreateAndDelete" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ZabbixApiTest" />
-        <item itemvalue="JUnit.ZabbixApiTest.testItemListCreateAndDelete" />
-        <item itemvalue="JUnit.ZabbixApiTest.testItemCreateAndDelete" />
-        <item itemvalue="JUnit.ZabbixApiTest.testItemCreate" />
-        <item itemvalue="JUnit.ZabbixApiTest.testHostInterfaceListCreateError" />
+        <item itemvalue="JUnit.ZabbixApiTest.testHostgroupCreateAndDelete" />
+        <item itemvalue="JUnit.ZabbixApiTest.testLogin" />
+        <item itemvalue="JUnit.ZabbixApiTest.testApiVersion" />
+        <item itemvalue="JUnit.ZabbixApiTest.testHostListCreateAndDelete" />
       </list>
     </recent_temporary>
   </component>
@@ -529,44 +606,45 @@
       <workItem from="1536825311627" duration="21262000" />
       <workItem from="1536925806195" duration="19590000" />
       <workItem from="1537173716418" duration="3457000" />
-      <workItem from="1537233766105" duration="23722000" />
+      <workItem from="1537233766105" duration="28339000" />
+      <workItem from="1537857101259" duration="15769000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ZabbixApiTest_testItemCreate - 2018.09.18 at 16h 52m 13s.xml">
-      <configuration name="ZabbixApiTest.testItemCreate" configurationId="JUnit" />
+    <history-entry file="ZabbixApiTest - 2018.09.25 at 23h 27m 06s.xml">
+      <configuration name="ZabbixApiTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ZabbixApiTest_testItemCreate - 2018.09.18 at 16h 52m 53s.xml">
-      <configuration name="ZabbixApiTest.testItemCreate" configurationId="JUnit" />
+    <history-entry file="ZabbixApiTest - 2018.09.25 at 23h 29m 17s.xml">
+      <configuration name="ZabbixApiTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ZabbixApiTest_testItemCreateAndDelete - 2018.09.18 at 17h 50m 32s.xml">
-      <configuration name="ZabbixApiTest.testItemCreateAndDelete" configurationId="JUnit" />
+    <history-entry file="ZabbixApiTest - 2018.09.25 at 23h 31m 18s.xml">
+      <configuration name="ZabbixApiTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ZabbixApiTest_testItemCreateAndDelete - 2018.09.18 at 17h 54m 37s.xml">
-      <configuration name="ZabbixApiTest.testItemCreateAndDelete" configurationId="JUnit" />
+    <history-entry file="ZabbixApiTest - 2018.09.25 at 23h 40m 43s.xml">
+      <configuration name="ZabbixApiTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ZabbixApiTest_testItemListCreateAndDelete - 2018.09.18 at 18h 02m 52s.xml">
-      <configuration name="ZabbixApiTest.testItemListCreateAndDelete" configurationId="JUnit" />
+    <history-entry file="ZabbixApiTest - 2018.09.25 at 23h 45m 10s.xml">
+      <configuration name="ZabbixApiTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ZabbixApiTest_testItemListCreateAndDelete - 2018.09.18 at 18h 04m 01s.xml">
-      <configuration name="ZabbixApiTest.testItemListCreateAndDelete" configurationId="JUnit" />
+    <history-entry file="ZabbixApiTest_testLogin - 2018.09.25 at 23h 45m 24s.xml">
+      <configuration name="ZabbixApiTest.testLogin" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ZabbixApiTest_testItemListCreateAndDelete - 2018.09.18 at 18h 04m 49s.xml">
-      <configuration name="ZabbixApiTest.testItemListCreateAndDelete" configurationId="JUnit" />
+    <history-entry file="ZabbixApiTest_testLogin - 2018.09.25 at 23h 48m 23s.xml">
+      <configuration name="ZabbixApiTest.testLogin" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ZabbixApiTest_testItemListCreateAndDelete - 2018.09.18 at 18h 08m 37s.xml">
-      <configuration name="ZabbixApiTest.testItemListCreateAndDelete" configurationId="JUnit" />
+    <history-entry file="ZabbixApiTest - 2018.09.25 at 23h 48m 48s.xml">
+      <configuration name="ZabbixApiTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ZabbixApiTest_testItemListCreateAndDelete - 2018.09.18 at 18h 09m 56s.xml">
-      <configuration name="ZabbixApiTest.testItemListCreateAndDelete" configurationId="JUnit" />
+    <history-entry file="ZabbixApiTest_testHostgroupCreateAndDelete - 2018.09.25 at 23h 48m 58s.xml">
+      <configuration name="ZabbixApiTest.testHostgroupCreateAndDelete" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ZabbixApiTest - 2018.09.18 at 18h 10m 58s.xml">
+    <history-entry file="ZabbixApiTest - 2018.09.25 at 23h 51m 33s.xml">
       <configuration name="ZabbixApiTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77564000" />
+    <option name="totallyTimeSpent" value="97950000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -574,25 +652,25 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32905984" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.4002849" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" weight="0.1615509" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.09686609" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32051283" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.025641026" />
       <window_info id="Designer" order="1" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.75641024" visible="true" weight="0.2552504" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.75379425" visible="true" weight="0.25928918" />
       <window_info anchor="bottom" id="Docker" order="7" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.15527065" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.47578347" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info id="Structure" order="4" sideWeight="0.24358974" weight="0.3546042" />
+      <window_info id="Structure" order="4" sideWeight="0.24620573" weight="0.33844912" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3988604" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -606,61 +684,70 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/org/cmbc/bigdata/zabbix/ZabbixApiTest.java</url>
+          <line>42</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestBuilder.java</url>
+          <line>56</line>
+          <properties />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/org/cmbc/bigdata/zabbix/ZabbixApiTest.java</url>
+          <line>55</line>
+          <properties />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/org/cmbc/bigdata/zabbix/ZabbixApiTest.java</url>
+          <line>52</line>
+          <properties />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApi.java</url>
+          <line>120</line>
+          <properties />
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestAbstract.java</url>
+          <line>18</line>
+          <properties />
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestBuilder.java</url>
+          <line>36</line>
+          <properties />
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="19" />
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="request.toString()" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>request.toString()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9195">
-          <caret line="636" column="16" selection-start-line="636" selection-start-column="16" selection-end-line="636" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIResultCode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIResult.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/cmbc/bigdata/zabbix/ZabbixApiTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4200">
-          <caret line="293" column="3" lean-forward="true" selection-start-line="293" selection-start-column="3" selection-end-line="293" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9225">
-          <caret line="615" column="56" selection-start-line="615" selection-start-column="56" selection-end-line="615" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIResult.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -778,6 +865,8 @@
           <caret line="50" column="36" selection-start-line="50" selection-start-column="36" selection-end-line="50" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#717#718#0" expanded="true" />
+            <element signature="e#761#762#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -871,51 +960,135 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIInterface.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        <state relative-caret-position="930">
+          <caret line="62" column="27" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixItemValueType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+    <entry file="file://$PROJECT_DIR$/README.adoc">
+      <provider selected="true" editor-type-id="split-provider[text-editor;AsciiDocPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="165">
+            <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestBuilder.java">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/src.zip!/java/util/LinkedList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-448">
-          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+        <state relative-caret-position="249">
+          <caret line="84" column="16" lean-forward="true" selection-start-line="84" selection-start-column="16" selection-end-line="84" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixItemType.java">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
+        <state relative-caret-position="234">
+          <caret line="106" column="21" lean-forward="true" selection-start-line="106" selection-start-column="21" selection-end-line="106" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/src.zip!/java/util/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="239" column="6" selection-start-line="239" selection-start-column="6" selection-end-line="239" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/src.zip!/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="110" column="17" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="33" lean-forward="true" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12-sources.jar!/org/junit/internal/runners/model/ReflectiveCallable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/Request.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="-5">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#717#718#0" expanded="true" />
+            <element signature="e#761#762#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ListRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIResult.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/MapRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+        <state relative-caret-position="135">
+          <caret line="9" column="28" lean-forward="true" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestAbstract.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="36" column="24" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
@@ -926,17 +1099,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixItemType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="62" column="27" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
+        <state relative-caret-position="360">
+          <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixItemValueType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/cmbc/bigdata/zabbix/ZabbixApiTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-171">
-          <caret line="138" column="59" lean-forward="true" selection-start-line="138" selection-start-column="59" selection-end-line="138" selection-end-column="59" />
+        <state relative-caret-position="280">
+          <caret line="61" column="17" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -945,21 +1125,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7284">
-          <caret line="563" column="25" selection-start-line="563" selection-start-column="25" selection-end-line="563" selection-end-column="25" />
+        <state relative-caret-position="238">
+          <caret line="185" column="11" selection-start-line="185" selection-start-column="11" selection-end-line="185" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2506#2507#0" expanded="true" />
+            <element signature="e#2563#2564#0" expanded="true" />
+            <element signature="e#4585#4586#0" expanded="true" />
+            <element signature="e#4636#4637#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/README.adoc">
-      <provider selected="true" editor-type-id="split-provider[text-editor;AsciiDocPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="270">
-            <caret line="18" column="38" lean-forward="true" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>

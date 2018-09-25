@@ -3,8 +3,7 @@ package org.cmbc.bigdata.zabbix;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.TextNode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.extern.log4j.Log4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -18,12 +17,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-@Getter
-@Setter
+@Data
 @Log4j
 public class ZabbixApi implements ZabbixAPIInterface {
   private URI uri;
@@ -72,7 +69,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
   public boolean login(String user, String password) {
     this.auth = null;
     String method = "user.login";
-    HashMap params = new HashMap();
+    HashMap<String, String> params = new HashMap();
     params.put("user", user);
     params.put("password", password);
 
@@ -91,22 +88,14 @@ public class ZabbixApi implements ZabbixAPIInterface {
     }
   }
 
+  public ZabbixAPIResult callApi(String method) {
+    return callApi(method, Collections.emptyList());
+  }
+
   public ZabbixAPIResult callApi(String method, Object params) {
     ZabbixAPIResult zabbixAPIResult = new ZabbixAPIResult();
-    RequestBuilder requestBuilder = RequestBuilder.newBuilder().method(method);
+    RequestBuilder requestBuilder = RequestBuilder.newBuilder().initRequest(params).method(method);
 
-    if (params != null && params instanceof Map) {
-      requestBuilder = requestBuilder.initParam("Map");
-      for (Map.Entry<String, Object> param : ((Map<String, Object>)params).entrySet()) {
-        requestBuilder.paramEntry(param.getKey(), param.getValue());
-      }
-    }
-    if (params != null && params instanceof List) {
-      requestBuilder = requestBuilder.initParam("List");
-      for (Object param : (List)params) {
-        requestBuilder.paramAdd(param);
-      }
-    }
     JsonNode response = call(requestBuilder.build());
     if (response.has("error")) {
       zabbixAPIResult.setCode(response.get("error").get("code").asInt());
@@ -123,7 +112,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
     return zabbixAPIResult;
   }
 
-  public JsonNode call(Request request) {
+  public JsonNode call(RequestAbstract request) {
     if (request.getAuth() == null) {
       request.setAuth(this.auth);
     }
@@ -152,8 +141,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /** Get Zabbix API version. No need to login before that. */
   public ZabbixAPIResult apiVersion() {
-    List params = new ArrayList();
-    return callApi("apiinfo.version", params);
+    return callApi("apiinfo.version");
   }
 
   /**
@@ -177,10 +165,10 @@ public class ZabbixApi implements ZabbixAPIInterface {
    */
   public ZabbixAPIResult hostgroupListCreate(ArrayList<String> groupNameList) {
     String method = "hostgroup.create";
-    ArrayList<HashMap> params = new ArrayList<>();
+    ArrayList<HashMap<String, String>> params = new ArrayList<>();
 
     groupNameList.forEach(groupname->{
-      HashMap map = new HashMap();
+      HashMap<String, String> map = new HashMap();
       map.put("name", groupname);
       params.add(map);
     });
