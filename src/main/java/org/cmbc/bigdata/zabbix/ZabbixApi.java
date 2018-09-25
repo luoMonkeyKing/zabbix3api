@@ -19,6 +19,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 @Data
 @Log4j
@@ -183,8 +184,8 @@ public class ZabbixApi implements ZabbixAPIInterface {
    */
   public ZabbixAPIResult hostgroupListGetByName(ArrayList<String> groupNameList) {
     String method = "hostgroup.get";
-    HashMap params = new HashMap();
-    HashMap nameMap = new HashMap();
+    HashMap<String, HashMap<String, List<String>>> params = new HashMap();
+    HashMap<String, List<String>> nameMap = new HashMap();
     nameMap.put("name", groupNameList);
     params.put("filter", nameMap);
 
@@ -219,7 +220,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
       hostIdList.add(hostid.asText());
     });
 
-    HashMap params = new HashMap();
+    HashMap<String, List<String>> params = new HashMap();
     params.put("hostids", hostIdList);
 
     String method = "hostgroup.get";
@@ -285,7 +286,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
     } else {
       zabbixAPIResult.setCode(ZabbixAPIResultCode.SUCCESS.code());
       zabbixAPIResult.setMessage("Call Zabbix API Success.");
-      HashMap groupids = new HashMap();
+      HashMap<String, List<String>> groupids = new HashMap();
       groupids.put("groupids", hostGroupIdList);
       zabbixAPIResult.setData(groupids);
 
@@ -329,12 +330,12 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
     ArrayList<HashMap> groups = new ArrayList();
     groupIdList.forEach(groupId->{
-      HashMap group = new HashMap();
+      HashMap<String, String> group = new HashMap();
       group.put("groupid", groupId);
       groups.add(group);
     });
 
-    HashMap params = new HashMap();
+    HashMap<String, Object> params = new HashMap();
     params.put("host", host);
     params.put("groups", groups);
     params.put("interfaces", hostInterfaces);
@@ -378,8 +379,8 @@ public class ZabbixApi implements ZabbixAPIInterface {
   public ZabbixAPIResult hostListGetByHostName(ArrayList<String> hostNameList) {
     String method = "host.get";
 
-    HashMap params = new HashMap();
-    HashMap filter = new HashMap();
+    HashMap<String, HashMap<String, List<String>>> params = new HashMap();
+    HashMap<String, List<String>> filter = new HashMap();
     filter.put("host", hostNameList);
     params.put("filter", filter);
 
@@ -393,7 +394,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
    *         host, hostid, name, status etc. If exists, fetch the first one.
    */
   public ZabbixAPIResult hostGetByHostName(String host) {
-    ArrayList hostNameList = new ArrayList();
+    ArrayList<String> hostNameList = new ArrayList();
     hostNameList.add(host);
 
     return hostListGetByHostName(hostNameList);
@@ -416,7 +417,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
       });
     }
 
-    HashMap params = new HashMap();
+    HashMap<String, List<String>> params = new HashMap();
     if (groupIdList.size() > 0) {
       params.put("groupids", groupIdList);
     }
@@ -443,12 +444,12 @@ public class ZabbixApi implements ZabbixAPIInterface {
       });
     }
 
-    HashMap params = new HashMap();
+    HashMap<String, Object> params = new HashMap();
     if (groupIdList.size() > 0) {
       params.put("groupids", groupIdList);
     }
 
-    HashMap filter = new HashMap();
+    HashMap<String, List<String>> filter = new HashMap();
     filter.put("host", hostNameList);
     params.put("filter", filter);
 
@@ -503,7 +504,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
     ZabbixAPIResult zabbixAPIResult = new ZabbixAPIResult();
     zabbixAPIResult.setCode(ZabbixAPIResultCode.SUCCESS.code());
     zabbixAPIResult.setMessage("Call Zabbix API Success.");
-    HashMap groupids = new HashMap();
+    HashMap<String, List<String>> groupids = new HashMap();
     groupids.put("hostids", hostIdList);
     zabbixAPIResult.setData(groupids);
 
@@ -553,7 +554,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
                                              String port, String type, String useip, String bulk) {
     String method = "hostinterface.create";
 
-    HashMap param = new HashMap();
+    HashMap<String, String> param = new HashMap();
     param.put("dns", dns);
     param.put("hostid", hostid);
     param.put("ip", ip);
@@ -599,7 +600,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
   public ZabbixAPIResult hostInterfaceGetByHostIds(ArrayList<String> hostIdList) {
     String method = "hostinterface.get";
 
-    HashMap param = new HashMap();
+    HashMap<String, List<String>> param = new HashMap();
     param.put("hostids", hostIdList);
 
     return callApi(method, param);
@@ -623,7 +624,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
       hostIdList.add(host.get("hostid"));
     });
 
-    HashMap param = new HashMap();
+    HashMap<String, List<String>> param = new HashMap();
     param.put("hostids", hostIdList);
 
     return callApi(method, param);
@@ -647,7 +648,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
    * @return ZabbixAPIResult.data contains "itemids" field and fetch the first one of itemids.
    *    *         If error happened, refer to code, message, data for information.
    */
-  public ZabbixAPIResult itemCreate(HashMap param) {
+  public ZabbixAPIResult itemCreate(HashMap<String, Object> param) {
     String method = "item.create";
 
     String[] requiredProperties = {"delay", "hostid", "interfaceid", "key_", "name", "type", "value_type"};
@@ -673,7 +674,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
    * @return ZabbixAPIResult.data contains "itemids".
    *    *         If error happened, refer to code, message, data for information.
    */
-  public ZabbixAPIResult itemListCreate(ArrayList<HashMap> params) {
+  public ZabbixAPIResult itemListCreate(ArrayList<HashMap<String, Object>> params) {
     String method = "item.create";
 
     String[] requiredProperties = {"delay", "hostid", "interfaceid", "key_", "name", "type", "value_type"};
@@ -701,7 +702,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
    * @return True means item exists. False means item not exists.
    */
   public boolean itemExistsByItemKey(String hostname, String itemKey) {
-    ArrayList itemKeyList = new ArrayList();
+    ArrayList<String> itemKeyList = new ArrayList();
 
     itemKeyList.add(itemKey);
     ZabbixAPIResult itemGetResult = itemGetByHostNameAndItemKey(hostname, itemKeyList);
@@ -727,7 +728,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
    * @return True means item exists. False means item not exists.
    */
   public boolean itemExistsByItemName(String host, String itemName) {
-    ArrayList itemNameList = new ArrayList();
+    ArrayList<String> itemNameList = new ArrayList();
 
     itemNameList.add(itemName);
     ZabbixAPIResult itemGetResult = itemGetByHostNameAndItemName(host, itemNameList);
@@ -752,7 +753,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
    * @param filter It can include key_, name, etc.
    * @return ZabbixAPIResult.data is the item array found, with each one including itemid,hostid,key_,name,etc.
    */
-  public ZabbixAPIResult itemGet(HashMap param, HashMap filter) {
+  public ZabbixAPIResult itemGet(HashMap<String, Object> param, HashMap<String, Object> filter) {
     String method = "item.get";
     param.put("filter", filter);
 
@@ -766,8 +767,8 @@ public class ZabbixApi implements ZabbixAPIInterface {
    * @return ZabbixAPIResult.data is the item array found, with each one including itemid,hostid,key_,name,etc.
    */
   public ZabbixAPIResult itemGetByHostNameAndItemKey(String host, ArrayList<String> itemKeyList) {
-    HashMap param = new HashMap();
-    HashMap filter = new HashMap();
+    HashMap<String, Object> param = new HashMap();
+    HashMap<String, Object> filter = new HashMap();
 
     param.put("host", host);
     filter.put("key_", itemKeyList);
@@ -782,8 +783,8 @@ public class ZabbixApi implements ZabbixAPIInterface {
    * @return ZabbixAPIResult.data is the item array found, with each one including itemid,hostid,key_,name,etc.
    */
   public ZabbixAPIResult itemGetByHostNameAndItemName(String host, ArrayList<String> itemNameList) {
-    HashMap param = new HashMap();
-    HashMap filter = new HashMap();
+    HashMap<String, Object> param = new HashMap();
+    HashMap<String, Object> filter = new HashMap();
 
     param.put("host", host);
     filter.put("name", itemNameList);
@@ -808,7 +809,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
    * @return ZabbixAPIResult.data.itemids is the item array that have been deleted. Fetch the first one.
    */
   public ZabbixAPIResult itemDeleteByItemId(String itemId) {
-    ArrayList itemIdList = new ArrayList();
+    ArrayList<String> itemIdList = new ArrayList();
 
     itemIdList.add(itemId);
 
@@ -845,9 +846,9 @@ public class ZabbixApi implements ZabbixAPIInterface {
     if (itemGetResult.isFail()) return itemGetResult;
 
     JsonNode data = (JsonNode) itemGetResult.getData();
-    ArrayList itemIdList = new ArrayList();
+    ArrayList<String> itemIdList = new ArrayList();
     data.forEach(item->{
-      itemIdList.add(item.get("itemid"));
+      itemIdList.add(item.get("itemid").asText());
     });
 
     return itemListDeleteByItemId(itemIdList);

@@ -2,14 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7cd05e68-d38d-453e-bf69-96da4bd5c641" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ListRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/MapRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestAbstract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/Request.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/RequestBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixAPIResult.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApi.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -26,8 +18,8 @@
       <file leaf-file-name="ZabbixApi.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="185" column="11" selection-start-line="185" selection-start-column="11" selection-end-line="185" selection-end-column="11" />
+            <state relative-caret-position="250">
+              <caret line="850" column="48" selection-start-line="850" selection-start-column="48" selection-end-line="850" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2506#2507#0" expanded="true" />
@@ -607,14 +599,11 @@
       <workItem from="1536925806195" duration="19590000" />
       <workItem from="1537173716418" duration="3457000" />
       <workItem from="1537233766105" duration="28339000" />
-      <workItem from="1537857101259" duration="15769000" />
+      <workItem from="1537857101259" duration="16560000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ZabbixApiTest - 2018.09.25 at 23h 27m 06s.xml">
-      <configuration name="ZabbixApiTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="ZabbixApiTest - 2018.09.25 at 23h 29m 17s.xml">
       <configuration name="ZabbixApiTest" configurationId="JUnit" />
     </history-entry>
@@ -642,9 +631,12 @@
     <history-entry file="ZabbixApiTest - 2018.09.25 at 23h 51m 33s.xml">
       <configuration name="ZabbixApiTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="ZabbixApiTest - 2018.09.26 at 00h 04m 26s.xml">
+      <configuration name="ZabbixApiTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="97950000" />
+    <option name="totallyTimeSpent" value="98741000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -713,7 +705,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApi.java</url>
-          <line>120</line>
+          <line>121</line>
           <properties />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
@@ -1125,8 +1117,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/cmbc/bigdata/zabbix/ZabbixApi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="185" column="11" selection-start-line="185" selection-start-column="11" selection-end-line="185" selection-end-column="11" />
+        <state relative-caret-position="250">
+          <caret line="850" column="48" selection-start-line="850" selection-start-column="48" selection-end-line="850" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2506#2507#0" expanded="true" />
