@@ -114,7 +114,7 @@ Import the jar into your project and you can use it now.
 ----
 
 === Create/Delete/Get/Check Host
-## Host Create Example. Refer to ZabbixAPITest.java to get how to operate on multiple hosts.
+Host Create Example. Refer to ZabbixAPITest.java to get how to operate on multiple hosts.
 [source,java]
 ----
     String Zabbix_API_URL = "http://127.0.0.1:8888/zabbix/api_jsonrpc.php";
@@ -160,7 +160,7 @@ Import the jar into your project and you can use it now.
     zabbixApi.destroy();
 ----
 
-=== Extend
+=== How to Extend
 Zabbix3 has so many api method that we don't list all in zabbix3api. You can use callApi to make your own requests.
 Take usergroup.create for example as follows:
 
