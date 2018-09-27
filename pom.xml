@@ -6,7 +6,7 @@
 
     <groupId>org.cmbc.bigdata</groupId>
     <artifactId>zabbix3api</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1</version>
 
     <properties>
         <java.version>1.8</java.version>
