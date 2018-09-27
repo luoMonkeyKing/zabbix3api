@@ -16,10 +16,7 @@ import org.apache.http.impl.client.HttpClients;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Log4j
@@ -79,7 +76,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
       log.info("User " + user + " login failure. Error Info:" + zabbixAPIResult.getData());
       return false;
     } else {
-      String auth = ((TextNode)zabbixAPIResult.getData()).asText();
+      String auth = ((TextNode) zabbixAPIResult.getData()).asText();
       if (auth != null && !auth.isEmpty()) {
         this.auth = auth;
         log.info("User:" + user + " login success.");
@@ -140,16 +137,19 @@ public class ZabbixApi implements ZabbixAPIInterface {
     }
   }
 
-  /** Get Zabbix API version. No need to login before that. */
+  /**
+   * Get Zabbix API version. No need to login before that.
+   */
   public ZabbixAPIResult apiVersion() {
     return callApi("apiinfo.version");
   }
 
   /**
    * Create one host group.
+   *
    * @param groupname host group name
    * @return ZabbixAPIResult.data contains "groupids" field and fetch the first one of groupids.
-   *         If error happened, refer to code, message, data for information.
+   * If error happened, refer to code, message, data for information.
    */
   public ZabbixAPIResult hostgroupCreate(String groupname) {
     String method = "hostgroup.create";
@@ -161,6 +161,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Create multiple host groups.
+   *
    * @param groupNameList List of host group names
    * @return ZabbixAPIResult.data.groupids is the host group id array created
    */
@@ -168,7 +169,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
     String method = "hostgroup.create";
     ArrayList<HashMap<String, String>> params = new ArrayList<>();
 
-    groupNameList.forEach(groupname->{
+    groupNameList.forEach(groupname -> {
       HashMap<String, String> map = new HashMap();
       map.put("name", groupname);
       params.add(map);
@@ -179,6 +180,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Get multiple host groups by list of of host group names.
+   *
    * @param groupNameList List of host group names
    * @return ZabbixAPIResult.data is the host group array found, with each one including groupid,name,flags,internal
    */
@@ -193,10 +195,32 @@ public class ZabbixApi implements ZabbixAPIInterface {
   }
 
   /**
+   * Get multiple host group ids by list of of host group names.
+   *
+   * @param groupNameList List of host group names
+   * @return ZabbixAPIResult.data is the host group id array found
+   */
+  public ZabbixAPIResult hostgroupIdListGetByName(ArrayList<String> groupNameList) {
+    ZabbixAPIResult hostgroupGetResult = hostgroupListGetByName(groupNameList);
+    ArrayList<String> groupIdList = new ArrayList<>();
+
+    if (hostgroupGetResult.isFail()) return hostgroupGetResult;
+    JsonNode data = (JsonNode) hostgroupGetResult.getData();
+    data.forEach(group -> {
+      groupIdList.add(group.get("groupid").asText());
+    });
+
+    hostgroupGetResult.setData(groupIdList);
+
+    return hostgroupGetResult;
+  }
+
+  /**
    * Get host group by host group name.
+   *
    * @param groupname host group name
    * @return ZabbixAPIResult.data is the host group array found, with each one including groupid,name,flags,internal.
-   *         If found, get the first item.
+   * If found, get the first item.
    */
   public ZabbixAPIResult hostgroupGetByGroupName(String groupname) {
     ArrayList<String> groupNameList = new ArrayList<>();
@@ -207,16 +231,17 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Get host groups by host names
+   *
    * @param hostNameList List of host name
    * @return ZabbixAPIResult.data is the host group array found, with each one including groupid,name,flags,internal.
    */
   public ZabbixAPIResult hostgroupGetByHostNameList(ArrayList<String> hostNameList) {
     ZabbixAPIResult hostGetResult = hostListGetByHostName(hostNameList);
-    if(hostGetResult.isFail()) return hostGetResult;
+    if (hostGetResult.isFail()) return hostGetResult;
 
     JsonNode data = (JsonNode) hostGetResult.getData();
     ArrayList<String> hostIdList = new ArrayList<>();
-    data.get("hostids").forEach(hostid-> {
+    data.get("hostids").forEach(hostid -> {
       hostIdList.add(hostid.asText());
     });
 
@@ -229,9 +254,10 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Get host group by host name
+   *
    * @param host host name
    * @return ZabbixAPIResult.data is the host group array found, with each one including groupid,name,flags,internal.
-   *         If found, get the first item.
+   * If found, get the first item.
    */
   public ZabbixAPIResult hostgroupGetByHostName(String host) {
     ArrayList<String> hostNameList = new ArrayList<>();
@@ -242,6 +268,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Check host group whether exists.
+   *
    * @param groupname host group name
    * @return True means the host group exists. False means the host group not exists or search request returns some error.
    */
@@ -257,6 +284,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Delete multiple host groups by group ids
+   *
    * @param hostGroupIdList List of host group ids
    * @return ZabbixAPIResult.data.groupids returns groupids that have been deleted
    */
@@ -268,22 +296,19 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Delete multiple host groups by group name
+   *
    * @param groupNameList List of host group names
    * @return ZabbixAPIResult.data.groupids returns groupids that have been deleted
    */
   public ZabbixAPIResult hostgroupListDeleteByName(ArrayList<String> groupNameList) {
-    ZabbixAPIResult zabbixAPIResult = hostgroupListGetByName(groupNameList);
-    if (zabbixAPIResult.isFail()) return zabbixAPIResult;
-    JsonNode data = (JsonNode) zabbixAPIResult.getData();
-    ArrayList<String> hostGroupIdList = new ArrayList<>();
-    if(data.size() > 0) {
-      data.forEach(hostgroup-> {
-        hostGroupIdList.add(hostgroup.get("groupid").asText());
-      });
-    }
+    ZabbixAPIResult hostgroupGetResult = hostgroupIdListGetByName(groupNameList);
+    if (hostgroupGetResult.isFail()) return hostgroupGetResult;
+
+    ArrayList<String> hostGroupIdList = (ArrayList<String>) hostgroupGetResult.getData();
     if (hostGroupIdList.size() > 0) {
       return hostgroupListDeleteById(hostGroupIdList);
     } else {
+      ZabbixAPIResult zabbixAPIResult = new ZabbixAPIResult();
       zabbixAPIResult.setCode(ZabbixAPIResultCode.SUCCESS.code());
       zabbixAPIResult.setMessage("Call Zabbix API Success.");
       HashMap<String, List<String>> groupids = new HashMap();
@@ -296,6 +321,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Delete one host group by group id
+   *
    * @param hostGroupId host group id
    * @return ZabbixAPIResult.data.groupids.get(0) returns groupid that has been deleted
    */
@@ -308,6 +334,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Delete one host group by group name
+   *
    * @param groupname host group name
    * @return ZabbixAPIResult.data.groupids.get(0) returns groupid that has been deleted
    */
@@ -320,8 +347,9 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Create one host
-   * @param host host name
-   * @param groupIdList List of groupId to add the host to
+   *
+   * @param host           host name
+   * @param groupIdList    List of groupId to add the host to
    * @param hostInterfaces Interfaces to be created for the host
    * @return ZabbixAPIResult.data.hostids is the host id array created
    */
@@ -329,7 +357,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
     String method = "host.create";
 
     ArrayList<HashMap> groups = new ArrayList();
-    groupIdList.forEach(groupId->{
+    groupIdList.forEach(groupId -> {
       HashMap<String, String> group = new HashMap();
       group.put("groupid", groupId);
       groups.add(group);
@@ -345,6 +373,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Create multiple hosts.
+   *
    * @param hostParamList List of host params. Each param should contain host, groups, interfaces.
    * @return ZabbixAPIResult.data.hostids is the host id array created
    */
@@ -356,6 +385,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Check host whether exists.
+   *
    * @param host host name
    * @return True means the host exists. False means the host not exists or search request returns some error.
    */
@@ -371,10 +401,10 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Get hosts by host name list.
+   *
    * @param hostNameList List of host name
    * @return ZabbixAPIResult.data is the host array, with each one including host properties such as
-   *         host, hostid, name, status etc.
-   *
+   * host, hostid, name, status etc.
    */
   public ZabbixAPIResult hostListGetByHostName(ArrayList<String> hostNameList) {
     String method = "host.get";
@@ -389,9 +419,10 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Get host by host name.
+   *
    * @param host host name
    * @return ZabbixAPIResult.data is the host array, with each one including host properties such as
-   *         host, hostid, name, status etc. If exists, fetch the first one.
+   * host, hostid, name, status etc. If exists, fetch the first one.
    */
   public ZabbixAPIResult hostGetByHostName(String host) {
     ArrayList<String> hostNameList = new ArrayList();
@@ -402,20 +433,16 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Get host by group names.
+   *
    * @param groupNameList List of host group name
    * @return ZabbixAPIResult.data is the host array found.
    */
   public ZabbixAPIResult hostGetByGroupName(ArrayList<String> groupNameList) {
     String method = "host.get";
-    ArrayList<String> groupIdList = new ArrayList<>();
-    if (groupNameList.size() > 0) {
-      ZabbixAPIResult hostgroupGetResult = hostgroupListGetByName(groupNameList);
-      if (hostgroupGetResult.isFail()) return hostgroupGetResult;
-      JsonNode data = (JsonNode) hostgroupGetResult.getData();
-      data.forEach(group->{
-        groupIdList.add(group.get("groupid").asText());
-      });
-    }
+
+    ZabbixAPIResult hostgroupGetResult = hostgroupIdListGetByName(groupNameList);
+    if (hostgroupGetResult.isFail()) return hostgroupGetResult;
+    ArrayList<String> groupIdList = (ArrayList<String>) hostgroupGetResult.getData();
 
     HashMap<String, List<String>> params = new HashMap();
     if (groupIdList.size() > 0) {
@@ -427,23 +454,19 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Get host by host names and group names.
-   * @param hostNameList List of host name.
+   *
+   * @param hostNameList  List of host name.
    * @param groupNameList List of host group name
    * @return ZabbixAPIResult.data is the host array found.
    */
   public ZabbixAPIResult hostGetByHostNameAndGroupName(ArrayList<String> hostNameList,
                                                        ArrayList<String> groupNameList) {
     String method = "host.get";
-    ArrayList<String> groupIdList = new ArrayList<>();
-    if (groupNameList.size() > 0) {
-      ZabbixAPIResult hostgroupGetResult = hostgroupListGetByName(groupNameList);
-      if (hostgroupGetResult.isFail()) return hostgroupGetResult;
-      JsonNode data = (JsonNode) hostgroupGetResult.getData();
-      data.forEach(group->{
-        groupIdList.add(group.get("groupid").asText());
-      });
-    }
 
+    ZabbixAPIResult hostgroupGetResult = hostgroupIdListGetByName(groupNameList);
+    if (hostgroupGetResult.isFail()) return hostgroupGetResult;
+
+    ArrayList<String> groupIdList = (ArrayList<String>) hostgroupGetResult.getData();
     HashMap<String, Object> params = new HashMap();
     if (groupIdList.size() > 0) {
       params.put("groupids", groupIdList);
@@ -458,6 +481,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Delete multiple hosts by host ids.
+   *
    * @param hostIdList List of host id
    * @return ZabbixAPIResult.data.hostids is host id array that have been deleted
    */
@@ -469,9 +493,10 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Delete host by host id
+   *
    * @param hostId host id
    * @return ZabbixAPIResult.data.hostids is host id array that have been deleted.
-   *         If host id exists, fetch the first one.
+   * If host id exists, fetch the first one.
    */
   public ZabbixAPIResult hostDeleteById(String hostId) {
     ArrayList<String> hostIdList = new ArrayList<>();
@@ -482,9 +507,10 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Delete hosts by host names.
+   *
    * @param hostNameList List of host name
    * @return ZabbixAPIResult.data.hostids is host id array that have been deleted.
-   *         If host id exists, fetch the first one.
+   * If host id exists, fetch the first one.
    */
   public ZabbixAPIResult hostListDeleteByName(ArrayList<String> hostNameList) {
     ZabbixAPIResult hostListGetResult = hostListGetByHostName(hostNameList);
@@ -492,7 +518,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
     JsonNode data = (JsonNode) hostListGetResult.getData();
     ArrayList<String> hostIdList = new ArrayList<>();
     if (data.size() > 0) {
-      data.forEach(host->{
+      data.forEach(host -> {
         hostIdList.add(host.get("hostid").asText());
       });
     }
@@ -513,9 +539,10 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Delete host by host name.
+   *
    * @param host host name
    * @return ZabbixAPIResult.data.hostids is host id array that have been deleted.
-   *         If host id exists, fetch the first one.
+   * If host id exists, fetch the first one.
    */
   public ZabbixAPIResult hostDeleteByName(String host) {
     ArrayList<String> hostNameList = new ArrayList<>();
@@ -526,28 +553,29 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Create host interface.
-   * @param dns required property. DNS name used by the interface. Can be empty if the connection is made via IP.
+   *
+   * @param dns    required property. DNS name used by the interface. Can be empty if the connection is made via IP.
    * @param hostid required property. ID of the host the interface belongs to.
-   * @param ip required property. IP address used by the interface. Can be empty if the connection is made via DNS.
-   * @param main required property. Whether the interface is used as default on the host.
-   *             Possible values are:
-   *             0 - not default;
-   *             1 - default.
-   * @param port required property. Port number used by the interface.
-   * @param type required property. Interface type.
-   *             Possible values are:
-   *             1 - agent;
-   *             2 - SNMP;
-   *             3 - IPMI;
-   *             4 - JMX.
-   * @param useip required property. Whether the connection should be made via IP.
-   *              Possible values are:
-   *              0 - connect using host DNS name;
-   *              1 - connect using host IP address for this host interface.
-   * @param bulk not required property. Whether to use bulk SNMP requests.
-   *              Possible values are:
-   *              0 - don't use bulk requests;
-   *              1 - (default) use bulk requests.
+   * @param ip     required property. IP address used by the interface. Can be empty if the connection is made via DNS.
+   * @param main   required property. Whether the interface is used as default on the host.
+   *               Possible values are:
+   *               0 - not default;
+   *               1 - default.
+   * @param port   required property. Port number used by the interface.
+   * @param type   required property. Interface type.
+   *               Possible values are:
+   *               1 - agent;
+   *               2 - SNMP;
+   *               3 - IPMI;
+   *               4 - JMX.
+   * @param useip  required property. Whether the connection should be made via IP.
+   *               Possible values are:
+   *               0 - connect using host DNS name;
+   *               1 - connect using host IP address for this host interface.
+   * @param bulk   not required property. Whether to use bulk SNMP requests.
+   *               Possible values are:
+   *               0 - don't use bulk requests;
+   *               1 - (default) use bulk requests.
    * @return ZabbixAPIResult.data.interfaceids is the interface id array
    */
   public ZabbixAPIResult hostInterfaceCreate(String dns, String hostid, String ip, String main,
@@ -569,6 +597,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Create multiple host interfaces.
+   *
    * @param hostInterfaceList List of host interface params
    * @return ZabbixAPIResult.data.interfaceids is the interface id array
    */
@@ -577,8 +606,8 @@ public class ZabbixApi implements ZabbixAPIInterface {
     String[] requiredProperties = {"dns", "hostid", "ip", "main", "port", "type", "useip"};
     ZabbixAPIResult zabbixAPIResult = new ZabbixAPIResult();
 
-    for (int i=0; i< hostInterfaceList.size(); i++) {
-      for (int j=0; j<requiredProperties.length; j++) {
+    for (int i = 0; i < hostInterfaceList.size(); i++) {
+      for (int j = 0; j < requiredProperties.length; j++) {
         if (!hostInterfaceList.get(i).containsKey(requiredProperties[j])) {
           zabbixAPIResult.setCode(ZabbixAPIResultCode.PARAM_IS_INVALID.code());
           zabbixAPIResult.setMessage(ZabbixAPIResultCode.PARAM_IS_INVALID.message() +
@@ -593,9 +622,10 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Get host interface by host ids.
+   *
    * @param hostIdList List of host id
    * @return ZabbixAPIResult.data is host interface array found, with each one including
-   *        interfaceid, hostid, main, type, useip, ip, etc.
+   * interfaceid, hostid, main, type, useip, ip, etc.
    */
   public ZabbixAPIResult hostInterfaceGetByHostIds(ArrayList<String> hostIdList) {
     String method = "hostinterface.get";
@@ -608,9 +638,10 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Get host interfaces by host names.
+   *
    * @param hostNameList List of host name
    * @return ZabbixAPIResult.data is host interface array found, with each one including
-   *        interfaceid, hostid, main, type, useip, ip, etc.
+   * interfaceid, hostid, main, type, useip, ip, etc.
    */
   public ZabbixAPIResult hostInterfaceGetByHostNames(ArrayList<String> hostNameList) {
     String method = "hostinterface.get";
@@ -620,7 +651,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
     ArrayList hostIdList = new ArrayList();
     JsonNode data = (JsonNode) hostGetResult.getData();
-    data.forEach(host->{
+    data.forEach(host -> {
       hostIdList.add(host.get("hostid"));
     });
 
@@ -632,6 +663,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Delete multiple host interfaces by host interface ids
+   *
    * @param hostInterfaceIdList List of h ids
    * @return ZabbixAPIResult.data.interfaceids returns interfaceids that have been deleted
    */
@@ -643,43 +675,34 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Create item.
+   *
    * @param param item parameter.
    *              It should contain the required properties:delay,hostid,interfaceid,key_,name,type,value_type.
    * @return ZabbixAPIResult.data contains "itemids" field and fetch the first one of itemids.
-   *    *         If error happened, refer to code, message, data for information.
+   * *         If error happened, refer to code, message, data for information.
    */
   public ZabbixAPIResult itemCreate(HashMap<String, Object> param) {
-    String method = "item.create";
+    ArrayList<HashMap<String, Object>> params = new ArrayList<>();
 
-    String[] requiredProperties = {"delay", "hostid", "interfaceid", "key_", "name", "type", "value_type"};
-    ZabbixAPIResult zabbixAPIResult = new ZabbixAPIResult();
+    params.add(param);
 
-    for (int i=0; i < requiredProperties.length; i++) {
-      if (!param.containsKey(requiredProperties[i])) {
-        zabbixAPIResult.setCode(ZabbixAPIResultCode.PARAM_IS_INVALID.code());
-        zabbixAPIResult.setMessage(ZabbixAPIResultCode.PARAM_IS_INVALID.message() +
-                requiredProperties + " are required.");
-        zabbixAPIResult.setData("Param has no property : " + requiredProperties[i]);
-        return zabbixAPIResult;
-      }
-    }
-
-    return callApi(method, param);
+    return itemListCreate(params);
   }
 
   /**
    * Create multiple items.
+   *
    * @param params List of item parameter .
-   *              Each parameter should contain the required properties:delay,hostid,interfaceid,key_,name,type,value_type.
+   *               Each parameter should contain the required properties:delay,hostid,interfaceid,key_,name,type,value_type.
    * @return ZabbixAPIResult.data contains "itemids".
-   *    *         If error happened, refer to code, message, data for information.
+   * *         If error happened, refer to code, message, data for information.
    */
   public ZabbixAPIResult itemListCreate(ArrayList<HashMap<String, Object>> params) {
     String method = "item.create";
 
     String[] requiredProperties = {"delay", "hostid", "interfaceid", "key_", "name", "type", "value_type"};
     ZabbixAPIResult zabbixAPIResult = new ZabbixAPIResult();
-    for (int i=0 ;i < params.size(); i++) {
+    for (int i = 0; i < params.size(); i++) {
       HashMap param = params.get(i);
       for (int j = 0; j < requiredProperties.length; j++) {
         if (!param.containsKey(requiredProperties[j])) {
@@ -697,8 +720,9 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Check whether item exists by host name and item key.
+   *
    * @param hostname host name
-   * @param itemKey item key_
+   * @param itemKey  item key_
    * @return True means item exists. False means item not exists.
    */
   public boolean itemExistsByItemKey(String hostname, String itemKey) {
@@ -707,23 +731,13 @@ public class ZabbixApi implements ZabbixAPIInterface {
     itemKeyList.add(itemKey);
     ZabbixAPIResult itemGetResult = itemGetByHostNameAndItemKey(hostname, itemKeyList);
 
-    if (!itemGetResult.isFail()) {
-      JsonNode data = (JsonNode) itemGetResult.getData();
-
-      if (data.size() > 0) {
-        String itemid = data.get(0).get("itemid").asText();
-        if (itemid != null && !itemid.isEmpty()) {
-          return true;
-        }
-      }
-    }
-
-    return false;
+    return itemExistsByCheckResult(itemGetResult);
   }
 
   /**
    * Check whether item exists by host name and item name.
-   * @param host host name
+   *
+   * @param host     host name
    * @param itemName item name
    * @return True means item exists. False means item not exists.
    */
@@ -733,6 +747,10 @@ public class ZabbixApi implements ZabbixAPIInterface {
     itemNameList.add(itemName);
     ZabbixAPIResult itemGetResult = itemGetByHostNameAndItemName(host, itemNameList);
 
+    return itemExistsByCheckResult(itemGetResult);
+  }
+
+  private boolean itemExistsByCheckResult(ZabbixAPIResult itemGetResult) {
     if (!itemGetResult.isFail()) {
       JsonNode data = (JsonNode) itemGetResult.getData();
 
@@ -749,7 +767,8 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Get item by param and search info.
-   * @param param It can include itemids, groupids, hostids, interfaceids, host, group, etc
+   *
+   * @param param  It can include itemids, groupids, hostids, interfaceids, host, group, etc
    * @param filter It can include key_, name, etc.
    * @return ZabbixAPIResult.data is the item array found, with each one including itemid,hostid,key_,name,etc.
    */
@@ -762,7 +781,8 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Get item by host and item key.
-   * @param host host name
+   *
+   * @param host        host name
    * @param itemKeyList List of item key_
    * @return ZabbixAPIResult.data is the item array found, with each one including itemid,hostid,key_,name,etc.
    */
@@ -778,7 +798,8 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Get item by host and item name.
-   * @param host host name
+   *
+   * @param host         host name
    * @param itemNameList List of item name
    * @return ZabbixAPIResult.data is the item array found, with each one including itemid,hostid,key_,name,etc.
    */
@@ -794,6 +815,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Delete multiple item by item ids.
+   *
    * @param itemIdList List of item id.
    * @return ZabbixAPIResult.data.itemids is the item array that have been deleted.
    */
@@ -805,6 +827,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Delete item by item id.
+   *
    * @param itemId item id.
    * @return ZabbixAPIResult.data.itemids is the item array that have been deleted. Fetch the first one.
    */
@@ -818,7 +841,8 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Delete items by item key
-   * @param host host name
+   *
+   * @param host        host name
    * @param itemKeyList List of item key
    * @return ZabbixAPIResult.data.itemids is the item array that have been deleted.
    */
@@ -828,7 +852,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
     JsonNode data = (JsonNode) itemGetResult.getData();
     ArrayList itemIdList = new ArrayList();
-    data.forEach(item->{
+    data.forEach(item -> {
       itemIdList.add(item.get("itemid"));
     });
 
@@ -837,7 +861,8 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Delete items by item name
-   * @param host host name
+   *
+   * @param host         host name
    * @param itemNameList List of item name
    * @return ZabbixAPIResult.data.itemids is the item array that have been deleted.
    */
@@ -847,7 +872,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
     JsonNode data = (JsonNode) itemGetResult.getData();
     ArrayList<String> itemIdList = new ArrayList();
-    data.forEach(item->{
+    data.forEach(item -> {
       itemIdList.add(item.get("itemid").asText());
     });
 

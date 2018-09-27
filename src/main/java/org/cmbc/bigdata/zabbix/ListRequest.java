@@ -15,7 +15,7 @@ public class ListRequest extends RequestAbstract {
 
   @Override
   void setParams(Object params) {
-    this.params = (List)params;
+    this.params = (List) params;
   }
 
   @Override

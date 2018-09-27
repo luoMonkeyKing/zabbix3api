@@ -13,12 +13,12 @@ public class RequestBuilder {
 
   }
 
-  static public org.cmbc.bigdata.zabbix.RequestBuilder newBuilder(){
+  static public org.cmbc.bigdata.zabbix.RequestBuilder newBuilder() {
     return new RequestBuilder();
   }
 
   public RequestAbstract build() {
-    if(request.getId() == null){
+    if (request.getId() == null) {
       request.setId(nextId.getAndIncrement());
     }
 
@@ -45,25 +45,27 @@ public class RequestBuilder {
 
   /**
    * Do not necessary to call this method.If don not set id, ZabbixApi will auto set request auth..
+   *
    * @param auth
    * @return
    */
-  public RequestBuilder auth(String auth){
+  public RequestBuilder auth(String auth) {
     request.setAuth(auth);
     return this;
   }
 
-  public RequestBuilder method(String method){
+  public RequestBuilder method(String method) {
     request.setMethod(method);
     return this;
   }
 
   /**
    * Do not necessary to call this method.If don not set id, RequestBuilder will auto generate.
+   *
    * @param id
    * @return
    */
-  public RequestBuilder id(Integer id){
+  public RequestBuilder id(Integer id) {
     request.setId(id);
     return this;
   }

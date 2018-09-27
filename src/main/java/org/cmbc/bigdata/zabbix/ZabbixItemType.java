@@ -1,7 +1,8 @@
 package org.cmbc.bigdata.zabbix;
+
 /**
  * Type of the item.
- *
+ * <p>
  * Possible values:
  * 0 - Zabbix agent;
  * 1 - SNMPv1 agent;

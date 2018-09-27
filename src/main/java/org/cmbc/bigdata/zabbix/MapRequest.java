@@ -15,7 +15,7 @@ public class MapRequest extends RequestAbstract {
 
   @Override
   void setParams(Object params) {
-    this.params = (Map)params;
+    this.params = (Map) params;
   }
 
   @Override

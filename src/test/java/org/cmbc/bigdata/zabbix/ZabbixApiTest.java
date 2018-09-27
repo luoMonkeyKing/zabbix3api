@@ -41,7 +41,7 @@ public class ZabbixApiTest {
   @Test
   public void testApiVersion() {
     ZabbixAPIResult zabbixAPIResult = zabbixApi.apiVersion();
-    if(!zabbixAPIResult.isFail()) {
+    if (!zabbixAPIResult.isFail()) {
       JsonNode data = (JsonNode) zabbixAPIResult.getData();
       String version = data.asText();
       assertEquals(version, Zabbix_Version);
@@ -140,7 +140,7 @@ public class ZabbixApiTest {
     if (!hostgroupGetResult.isFail()) {
       JsonNode data = (JsonNode) hostgroupGetResult.getData();
       if (data.size() > 0) {
-        data.forEach(group->{
+        data.forEach(group -> {
           Map groupMap = new HashMap();
           groupMap.put("groupid", group.get("groupid").asText());
           groupIdList.add(groupMap);
@@ -152,7 +152,7 @@ public class ZabbixApiTest {
       ZabbixAPIResult hostgroupCreateResult = zabbixApi.hostgroupListCreate(groupNameList);
       if (!hostgroupCreateResult.isFail()) {
         JsonNode result = (JsonNode) hostgroupCreateResult.getData();
-        result.get("groupids").forEach(groupid->{
+        result.get("groupids").forEach(groupid -> {
           Map groupMap = new HashMap();
           groupMap.put("groupid", groupid);
           groupIdList.add(groupMap);
@@ -258,7 +258,7 @@ public class ZabbixApiTest {
     if (!hostInterfaceGetResult.isFail()) {
       JsonNode hostInterfaces = (JsonNode) hostInterfaceGetResult.getData();
       if (hostInterfaces.size() > 0) {
-        hostInterfaces.forEach(hostInterface->{
+        hostInterfaces.forEach(hostInterface -> {
           interfaceIdList.add(hostInterface.get("interfaceid").asText());
         });
       }
@@ -439,7 +439,7 @@ public class ZabbixApiTest {
     ArrayList itemKeys = new ArrayList();
     if (!itemGetResult.isFail()) {
       JsonNode data = (JsonNode) itemGetResult.getData();
-      data.forEach(item->{
+      data.forEach(item -> {
         itemKeys.add(item.get("key_").asText());
       });
     }
