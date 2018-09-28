@@ -139,6 +139,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   /**
    * Get Zabbix API version. No need to login before that.
+   * @return
    */
   public ZabbixAPIResult apiVersion() {
     return callApi("apiinfo.version");

@@ -45,9 +45,8 @@ public class RequestBuilder {
 
   /**
    * Do not necessary to call this method.If don not set id, ZabbixApi will auto set request auth..
-   *
-   * @param auth
-   * @return
+   * @param auth authentication to login zabbix
+   * @return RequestBuilder
    */
   public RequestBuilder auth(String auth) {
     request.setAuth(auth);
