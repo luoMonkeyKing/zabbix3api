@@ -6,7 +6,7 @@
 
     <groupId>com.github.tinawenqiao</groupId>
     <artifactId>zabbix3api</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Zabbix V3 API</description>
     <url>https://github.com/tinawenqiao/zabbix3api</url>
@@ -52,7 +52,7 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <jackson.version>2.9.1</jackson.version>
+        <jackson.version>2.9.7</jackson.version>
         <lombok.version>1.16.16</lombok.version>
         <httpclient.version>4.5.5</httpclient.version>
         <log4j.version>1.2.17</log4j.version>
