@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.TextNode;
 import lombok.Data;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -19,7 +19,7 @@ import java.net.URISyntaxException;
 import java.util.*;
 
 @Data
-@Log4j
+@Slf4j
 public class ZabbixApi implements ZabbixAPIInterface {
   private URI uri;
   private volatile String auth;
@@ -73,13 +73,13 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
     ZabbixAPIResult zabbixAPIResult = callApi(method, params);
     if (zabbixAPIResult.isFail()) {
-      log.info("User " + user + " login failure. Error Info:" + zabbixAPIResult.getData());
+      log.info("User {} login failure. Error Info:{}", user, zabbixAPIResult.getData());
       return false;
     } else {
       String auth = ((TextNode) zabbixAPIResult.getData()).asText();
       if (auth != null && !auth.isEmpty()) {
         this.auth = auth;
-        log.info("User:" + user + " login success.");
+        log.info("User:{} login success.", user);
         return true;
       }
       return false;
@@ -119,7 +119,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
       HttpUriRequest httpRequest = org.apache.http.client.methods.RequestBuilder.post().setUri(uri)
               .addHeader("Content-Type", "application/json")
               .setEntity(new StringEntity(request.toString(), ContentType.APPLICATION_JSON)).build();
-      log.info(("Call API. Request is :" + request.toString()));
+      log.info("Call API. Request is :{}", request.toString());
       CloseableHttpResponse response = httpClient.execute(httpRequest);
       HttpEntity entity = response.getEntity();
       return new ObjectMapper().readTree(entity.getContent());
@@ -130,7 +130,7 @@ public class ZabbixApi implements ZabbixAPIInterface {
 
   private void printAPIResult(ZabbixAPIResult zabbixAPIResult) {
     try {
-      log.info("Call API. Result is :" + new ObjectMapper().
+      log.info("Call API. Result is :{}", new ObjectMapper().
               writerWithDefaultPrettyPrinter().writeValueAsString(zabbixAPIResult));
     } catch (Exception exception) {
       exception.printStackTrace();

@@ -6,7 +6,7 @@
 
     <groupId>com.github.tinawenqiao</groupId>
     <artifactId>zabbix3api</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Zabbix V3 API</description>
     <url>https://github.com/tinawenqiao/zabbix3api</url>
@@ -55,7 +55,6 @@
         <jackson.version>2.9.7</jackson.version>
         <lombok.version>1.16.16</lombok.version>
         <httpclient.version>4.5.5</httpclient.version>
-        <log4j.version>1.2.17</log4j.version>
         <junit.version>4.12</junit.version>
     </properties>
 
@@ -82,9 +81,9 @@
             <version>${httpclient.version}</version>
         </dependency>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
