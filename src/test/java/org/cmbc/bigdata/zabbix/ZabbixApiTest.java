@@ -83,6 +83,18 @@ public class ZabbixApiTest {
     assertTrue(zabbixApi.hostgroupExists(Zabbix_Test_Host_Group_One));
     assertTrue(zabbixApi.hostgroupExists(Zabbix_Test_Host_Group_Two));
 
+    ZabbixAPIResult hostgroupListGetResult = zabbixApi.hostgroupListGetByName(groupNameList);
+    if (!hostgroupListGetResult.isFail()) {
+      JsonNode data = (JsonNode) hostgroupListGetResult.getData();
+      assertEquals(2, data.size());
+      if (data.size() > 0) {
+        data.forEach(hostgroup -> {
+          String groupname = hostgroup.get("name").asText();
+          assertTrue(groupNameList.contains(groupname));
+        });
+      }
+    }
+
     zabbixApi.hostgroupListDeleteByName(groupNameList);
   }
 
@@ -182,6 +194,18 @@ public class ZabbixApiTest {
 
     assertTrue(zabbixApi.hostExists(Zabbix_Test_Host_One));
     assertTrue(zabbixApi.hostExists(Zabbix_Test_Host_Two));
+
+    ZabbixAPIResult hostListGetResult = zabbixApi.hostListGetByHostName(hostNameList);
+    if (!hostListGetResult.isFail()) {
+      JsonNode data = (JsonNode) hostListGetResult.getData();
+      assertEquals(2, data.size());
+      if (data.size() > 0) {
+        data.forEach(host -> {
+          String hostname = host.get("host").asText();
+          assertTrue(hostNameList.contains(hostname));
+        });
+      }
+    }
 
     zabbixApi.hostListDeleteByName(hostNameList);
   }
