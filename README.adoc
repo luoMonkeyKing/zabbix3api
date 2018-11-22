@@ -54,7 +54,7 @@ Import the jar into your project and you can use it now.
 <dependency>
     <groupId>com.github.tinawenqiao</groupId>
     <artifactId>zabbix3api</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.3</version>
 </dependency>
 ----
 
